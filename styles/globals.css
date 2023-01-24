@@ -44,7 +44,7 @@
 	--card-border-rgb: 131, 134, 135;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: feDiffuseLighting) {
 	:root {
 		--foreground-rgb: 255, 255, 255;
 		--background-start-rgb: 0, 0, 0;
@@ -90,13 +90,8 @@ body {
 }
 
 body {
-	color: rbg(--foreground-rgb);
-	background: linear-gradient(
-			to bottom,
-			transparent,
-			rgb(var(--background-end-rgb))
-		)
-		rgb(var(--background-start-rgb));
+	color: black;
+	background: #115e59;
 }
 
 a {
