@@ -27,46 +27,42 @@ export default function Home() {
 					.select();
 				if (error) throw error;
 				console.log("data:", data);
-				// if (articles) {
-				// 	setArticles([...data, ...articles]);
-				// }
 			}
 		} catch (error) {
 			console.log("error:", error);
 		}
 	};
 	return (
-		<div className="relative bg-teal-400 m-4">
-			<div className="mx-auto max-w-7xl px-6">
+		<div className="relative bg-blue-200 m-8 rounded-md border-transparent p-4">
+			<div className="mx-auto max-w-7xl px-6 ">
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<div className="block text-sm font-medium text-grey-700 mt-4">
-						<h1 className="block text-lg font-medium text-grey-700 mt-4">
+					<div className="block text-sm text-grey-700 mt-4 ">
+						<h1 className="block text-lg font-extrabold text-grey-700 mt-4">
 							Blog It
 						</h1>
-						<p>Create a new post:</p>
-						<p>Title</p>
+						<h2 className="mt-4 font-medium">Create a new post:</h2>
+						<p className="mt-4 font-medium">Title</p>
 						<input
-							className="text-base font-medium text-gray-500"
+							className="text-base font-medium text-gray-900 rounded-md border-transparent p-1 w-full"
 							{...register("title", { required: true, maxLength: 50 })}
 						/>
-						<p>Author</p>
+						<p className="mt-4 font-medium">Author</p>
 						<input
-							className="text-base font-medium text-gray-500"
+							className="text-base font-medium text-gray-900 rounded-md border-transparent p-1 w-full"
 							{...register("author", {
 								required: true,
 								pattern: /^[A-Za-z]+$/i,
 							})}
 						/>
-						<p>Type your article below:</p>
+						<p className="mt-4 font-medium">Type your article below</p>
 						<input
-							className="text-base font-medium text-gray-500"
-							{...register("body", { required: true })}
+							className="text-base font-medium text-gray-900 rounded-md border-transparent p-1 w-full h-96"
+							{...register("body", { maxLength: 1000, required: true })}
 						/>
 						<div>
 							<button
-								className="text-gray-500 group inline-flex items-center rounded-md bg-red-900 text-base font-medium hover:text-gray-900"
+								className="text-blue-400 group inline-flex items-center rounded-md bg-blue-900 text-base font-medium hover:text-gray-900 p-1 mt-4"
 								type="submit"
-								// onClick={addNewArticle}
 							>
 								{" "}
 								Submit{" "}

@@ -91,7 +91,7 @@ body {
 
 body {
 	color: black;
-	background: #115e59;
+	background: #1e3a8a;
 }
 
 a {
@@ -106,4 +106,11 @@ a {
 }
 input {
 	color: black;
+	background-color: #eff6ff;
+}
+p {
+	font-size: 16px;
+}
+h1 {
+	font-size: 100px;
 }
