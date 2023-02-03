@@ -1,16 +1,15 @@
 # Blog it - 🚧  WIP 🚧 
 
-By popular demand and potential client requests, this personal project is built with TypeScript and Next.js. I also will be using the Supabase API and Tailwind.CSS. Headless UI has helped me with the design implementation as well. 
+By popular demand and potential client requests, this personal project is built with TypeScript and Next.js. I'll also sue the Supabase API as a database. styling using Tailwind.CSS and Headless UI. This is my first time venturing into the world of Headless UI and it's been a treat so far!
 
 ## Description 
 
-Currently WIP - this project will have a landing page and a write article page, which will enable users to post their articles. 
+Currently WIP - this project will have a landing page and a write/edit article page, which will enable logged-in users to post and make changes to their articles. 
 
-The app will feature authentication so signed-in users can add blog posts, while visitors can only read them.
+The app will feature authentication, so signed-in users can add blog posts, while visitors can only read them.
 
 ## Objective 🏔️
-I like clones - cloning takes the pressure off of creating a new app and it allows me to practice what I know while I learn new coding skills. 
-Clones also prevent me from spending too much designing the appearance of my application, allowing me to focus on functionality instead. 
+Creating a blog template, exploring some new libraries and learning how to implement unit testing.
 
 tldr:
 * Used Supabase as a database and for authentication
