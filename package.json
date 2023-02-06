@@ -7,7 +7,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.7.8",
+		"@headlessui/react": "^1.7.10",
 		"@supabase/supabase-js": "^2.4.1",
 		"gray-matter": "^4.0.2",
 		"next": "latest",

@@ -49,6 +49,6 @@ export const getStaticPaths = async () => {
 			fallback: false,
 		};
 	} catch (error) {
-		console.log("error on getStaticPatsh:", error);
+		console.log("error on getStaticPath:", error);
 	}
 };
