@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import supabase from "../utils/supabaseClient";
 import Link from "next/link";
-import { Post } from "../Common/types";
-import { Popover } from "@headlessui/react";
 
 type Article = {
 	title: string;
 	author: string;
+	id: string;
 };
 export async function getStaticProps() {
 	const getArticles = async () => {
@@ -38,10 +37,10 @@ export default function Index({ articles }: { articles: Article[] }) {
 				<h2> All Posts</h2>
 				<div>
 					<ul>
-						{articles?.map((article: Article, id) => (
+						{articles?.map(({ author, title, id }) => (
 							<li key={id}>
 								<Link as={`/articles/${id}`} href={`/articles/[slug]`}>
-									{article.title} by {article.author}
+									{title} by {author}
 								</Link>
 							</li>
 						))}

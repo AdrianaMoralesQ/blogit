@@ -9,10 +9,22 @@ import { Post } from "../../Common/types";
 // to handle import statements. Instead, you must include components in scope
 // here.
 
-export default function PostPage({ title, author, body }: Post) {
+export default function PostPage({
+	title,
+	author,
+	body,
+	description,
+	tags,
+}: Post) {
 	return (
 		<div>
-			<DisplayPost title={title} author={author} body={body} />
+			<DisplayPost
+				title={title}
+				author={author}
+				body={body}
+				description={description}
+				tags={tags}
+			/>
 		</div>
 	);
 }

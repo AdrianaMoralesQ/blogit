@@ -18,6 +18,7 @@ export default function Home() {
 	// React Form Hook, prevents use of useState for each input:
 	const { register, handleSubmit } = useForm<IFormInput>();
 	const [images, setImages] = useState<ImageListType>([]);
+	const [picture_url, setPicture_url] = useState<string>();
 	const onSubmit: SubmitHandler<IFormInput> = (data) => addNewArticle(data);
 	const onChange = (imageList: ImageListType) => {
 		setImages(imageList);
@@ -28,7 +29,6 @@ export default function Home() {
 		author,
 		body,
 		description,
-		picture_url,
 		tags,
 	}: IFormInput) => {
 		try {
@@ -69,10 +69,11 @@ export default function Home() {
 					if (error) throw error;
 					const resp = supabase.storage.from("public").getPublicUrl(data.path);
 					const publicUrl = resp.data.publicUrl;
-					const updateArticleResponse = await supabase
-						.from("articles")
-						.update({ picture_url: publicUrl });
-					if (updateArticleResponse.error) throw error;
+					setPicture_url(publicUrl);
+					// const updateArticleResponse = await supabase
+					// 	.from("articles")
+					// 	.update({ picture_url: publicUrl });
+					// if (updateArticleResponse.error) throw error;
 				}
 			}
 		} catch (error) {
@@ -150,6 +151,7 @@ export default function Home() {
 											<button
 												style={isDragging ? { color: "red" } : undefined}
 												onClick={onImageUpload}
+												type="button"
 												{...dragProps}
 												className="flex flex-col e-full justify-center items-center"
 											>
