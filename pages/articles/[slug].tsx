@@ -12,13 +12,6 @@ import { Post } from "../../Common/types";
 export default function PostPage({ title, author, body }: Post) {
 	return (
 		<div>
-			<header>
-				<nav>
-					<Link href="/" legacyBehavior>
-						<a>👈 Go back home</a>
-					</Link>
-				</nav>
-			</header>
 			<DisplayPost title={title} author={author} body={body} />
 		</div>
 	);

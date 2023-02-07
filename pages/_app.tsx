@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import type { AppProps } from "next/app";
 import "react-toastify/dist/ReactToastify.css";
+import Nav from "../components/Nav";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
 				pauseOnHover
 				theme="light"
 			/>
+			<Nav />
 			<Component {...pageProps} />
 		</div>
 	);
