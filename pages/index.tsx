@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import supabase from "../utils/supabaseClient";
 import Link from "next/link";
+import Image from "next/image";
 
 type Article = {
 	title: string;
 	author: string;
 	id: string;
+	picture_url: string | undefined;
 };
 export async function getStaticProps() {
 	const getArticles = async () => {
 		try {
 			const { data, error } = await supabase
 				.from("articles")
-				.select("id, title, author");
+				.select("id, title, author, picture_url");
 
 			if (error) throw error;
 			// console.log("data from index:", data);
@@ -37,10 +39,16 @@ export default function Index({ articles }: { articles: Article[] }) {
 				<h2> All Posts</h2>
 				<div>
 					<ul>
-						{articles?.map(({ author, title, id }) => (
+						{articles?.map(({ author, title, id, picture_url }) => (
 							<li key={id}>
 								<Link as={`/articles/${id}`} href={`/articles/[slug]`}>
-									{title} by {author}
+									{/* <Image
+										src={picture_url}
+										height={100}
+										width={100}
+										alt={`picture for ${title}`}
+									/> */}
+									{title}
 								</Link>
 							</li>
 						))}

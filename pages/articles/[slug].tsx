@@ -4,23 +4,20 @@ import supabase from "../../utils/supabaseClient";
 import { getPostFromID } from "../../utils/api";
 import { Post } from "../../Common/types";
 
-// Custom components/renderers to pass to MDX.
-// Since the MDX files aren't loaded by webpack, they have no knowledge of how
-// to handle import statements. Instead, you must include components in scope
-// here.
-
 export default function PostPage({
 	title,
 	author,
 	body,
 	description,
 	tags,
+	picture_url,
 }: Post) {
 	return (
 		<div>
 			<DisplayPost
 				title={title}
 				author={author}
+				image={picture_url}
 				body={body}
 				description={description}
 				tags={tags}

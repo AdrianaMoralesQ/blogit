@@ -104,6 +104,7 @@ export default function Home() {
 						<p className="mt-4 mb-2 font-medium">Author</p>
 						<input
 							className="text-base font-medium text-gray-900  bg-white rounded-md border-transparent p-1 w-full"
+							placeholder="Please add your pen name"
 							{...register("author", {
 								required: true,
 								pattern: /^[A-Za-z]+$/i,
@@ -118,6 +119,7 @@ export default function Home() {
 						<p className="mt-4 mb-2  font-medium">Tags</p>
 						<input
 							className="text-base font-medium text-gray-900  bg-white rounded-md border-transparent p-1 w-full"
+							placeholder="Start typing your tags"
 							{...register("tags", {
 								required: true,
 								pattern: /^[A-Za-z]+$/i,
@@ -155,7 +157,7 @@ export default function Home() {
 												{...dragProps}
 												className="flex flex-col e-full justify-center items-center"
 											>
-												Click or drag your new profile pic here.
+												Click or drag your article pic here.
 											</button>
 										) : (
 											<button onClick={onImageRemoveAll}>

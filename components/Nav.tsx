@@ -28,7 +28,7 @@ const Nav = () => {
 							href="/logout"
 							className=" text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 						>
-							Log out/Log in
+							Log out
 						</Link>
 					</div>
 				</div>
