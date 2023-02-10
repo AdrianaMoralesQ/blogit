@@ -12,6 +12,7 @@ export default function Signup() {
 	const { register, handleSubmit } = useForm<IFormInput>();
 	const onSubmit: SubmitHandler<IFormInput> = (data) => signUpWithEmail(data);
 	const [username, setUsername] = useState<string | undefined>();
+
 	const signUpWithEmail = async ({ username, email, password }: IFormInput) => {
 		try {
 			if (email && password && username) {
