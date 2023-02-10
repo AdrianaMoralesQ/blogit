@@ -42,7 +42,7 @@ export default function Signup() {
 		try {
 			const { error } = await supabase
 				.from("users")
-				.insert({ id: userId, username: username });
+				.insert({ user_id: userId, username: username });
 			setUsername(username);
 			if (error) throw error;
 		} catch (error) {
