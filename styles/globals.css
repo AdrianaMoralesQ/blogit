@@ -91,7 +91,7 @@ body {
 
 body {
 	color: black;
-	background: #0c4a6e;
+	background: #bae6fd;
 }
 
 a {
@@ -116,4 +116,8 @@ h1 {
 }
 h2 {
 	font-size: 30px;
+}
+
+h3 {
+	font-size: 24px;
 }

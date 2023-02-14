@@ -9,12 +9,12 @@ const Nav = () => {
 
 	return (
 		<header>
-			<nav className=" bg-sky-200">
+			<nav className=" bg-sky-800">
 				<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 					<div className="relative flex h-16 items-center justify-between">
 						<Link
 							href={"/"}
-							className=" text-black p-0.5 rounded-md text-lg font-medium hover:bg-grey-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+							className=" text-sky-100 p-0.5 rounded-md text-lg font-medium hover:bg-grey-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 						>
 							<Image
 								alt={`blog it logo`}
@@ -27,27 +27,27 @@ const Nav = () => {
 						{isAuthenticated ? (
 							<Link
 								href={`/${userName}`}
-								className=" text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+								className=" text-sky-100 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 							>
 								Editor
 							</Link>
 						) : (
 							<Link
 								href={"/"}
-								className=" text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+								className=" text-sky-100 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 							></Link>
 						)}
 						{isAuthenticated ? (
 							<Link
 								href="/logout"
-								className=" text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+								className=" text-sky-100 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 							>
 								Log out
 							</Link>
 						) : (
 							<Link
 								href="/login"
-								className=" text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+								className=" text-sky-100 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 							>
 								Log in
 							</Link>
