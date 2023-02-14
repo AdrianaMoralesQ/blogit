@@ -51,7 +51,7 @@ export function UserProvider({ children }: UserProviderProps) {
 			try {
 				const { data, error } = await supabase
 					.from("users")
-					.select("id")
+					.select("user_id")
 					.eq("username", creatorSlug);
 				if (error) throw error;
 				console.log("slug:", creatorSlug);
