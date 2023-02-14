@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
+import { UserContext } from "../context";
 import supabase from "../utils/supabaseClient";
 
 type IFormInput = {
@@ -11,7 +12,8 @@ type IFormInput = {
 export default function Signup() {
 	const { register, handleSubmit } = useForm<IFormInput>();
 	const onSubmit: SubmitHandler<IFormInput> = (data) => signUpWithEmail(data);
-	const [username, setUsername] = useState<string | undefined>();
+
+	const { setUserName } = useContext(UserContext);
 
 	const signUpWithEmail = async ({ username, email, password }: IFormInput) => {
 		try {
@@ -31,20 +33,21 @@ export default function Signup() {
 				if (resp.error) throw resp.error;
 				const userId = resp.data.user?.id;
 				if (userId) {
-					await createUser(userId);
-					console.log("userId:", userId);
+					await createUser(userId, username);
+					console.log("userId:", userId, username);
 				}
 			}
 		} catch (error) {
 			console.log("error:", error);
 		}
 	};
-	async function createUser(userId: string) {
+	async function createUser(userId: string, username: string) {
 		try {
 			const { error } = await supabase
 				.from("users")
 				.insert({ user_id: userId, username: username });
-			setUsername(username);
+			// instead of set username here, move to context
+			setUserName(username);
 			if (error) throw error;
 		} catch (error) {
 			console.log("error:", error);

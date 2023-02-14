@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
 import supabase from "../utils/supabaseClient";
 import Link from "next/link";
 import Image from "next/image";
+
+import { useContext } from "react";
+import { UserContext } from "../context";
 
 type Article = {
 	title: string;
@@ -9,6 +11,7 @@ type Article = {
 	id: string;
 	picture_url: string | undefined;
 };
+
 export async function getStaticProps() {
 	const getArticles = async () => {
 		try {
@@ -28,8 +31,19 @@ export async function getStaticProps() {
 }
 
 export default function Index({ articles }: { articles: Article[] }) {
+	const { isAuthenticated, userName } = useContext(UserContext);
+	console.log("username", userName);
 	return (
 		<div>
+			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4">
+				{isAuthenticated ? (
+					<h2 className="block font-extrabold text-grey-700 mt-4">
+						Hi {`${userName}`}!
+					</h2>
+				) : (
+					<h2 className="block font-extrabold text-grey-700 mt-4">Hi!</h2>
+				)}
+			</div>
 			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4">
 				<h2 className="block font-extrabold text-grey-700 mt-4">
 					Featured Posts

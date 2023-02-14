@@ -1,9 +1,10 @@
-import supabase from "../utils/supabaseClient";
+import supabase from "../../utils/supabaseClient";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import ImageUploading, { ImageListType } from "react-images-uploading";
+import { UserContext } from "../../context";
 
 type IFormInput = {
 	title: string;
@@ -23,6 +24,8 @@ export default function Home() {
 	const onChange = (imageList: ImageListType) => {
 		setImages(imageList);
 	};
+	const { userName } = useContext(UserContext);
+
 	// Function to add new article, it requires author, title and body.
 	const addNewArticle = async ({
 		title,
@@ -102,14 +105,16 @@ export default function Home() {
 							{...register("description", { required: true, maxLength: 50 })}
 						/>
 						<p className="mt-4 mb-2 font-medium">Author</p>
-						<input
+						<select
 							className="text-base font-medium text-gray-900  bg-white rounded-md border-transparent p-1 w-full"
-							placeholder="Please add your pen name"
+							placeholder="Please select name"
 							{...register("author", {
 								required: true,
 								pattern: /^[A-Za-z]+$/i,
 							})}
-						/>
+						>
+							<option value={`${userName}`}>{`${userName}`}</option>
+						</select>
 						<p className="mt-4 mb-2 font-medium">Type your article below</p>
 						<textarea
 							className="block w-full px-0 font-medium text-gray-900  bg-white rounded-md border-transparent p-1 dark:placeholder-gray-400"

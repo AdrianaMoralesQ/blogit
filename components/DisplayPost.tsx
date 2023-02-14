@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 type Props = {
 	title: string;
 	author: string;
@@ -18,23 +19,29 @@ export function DisplayPost({
 }: Props) {
 	return (
 		<>
-			<div className="bg-sky-100 m-8 rounded-md border-transparent p-4">
-				<h1>{title}</h1>
-				<div>
-					<Image
-						src={image}
-						alt={`Image for ${title}`}
-						height={400}
-						width={400}
-						className="object-contain"
-					/>
+			<div>
+				<div className="bg-sky-100 m-8 rounded-md border-transparent p-4">
+					<h1>{title}</h1>
+					<h2>{description}</h2>
+					<h3 className="m-auto">By {author}</h3>
 				</div>
-				<h2>{description}</h2>
+				<div className="m-8 relative bg-sky-100 rounded-md border-transparent p-4">
+					<div>
+						<Image
+							src={image}
+							alt={`Image for ${title}`}
+							height={400}
+							width={400}
+							className="m-auto rounded-md border-transparent"
+						/>
+					</div>
+				</div>
+				<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4 ">
+					{body}
+				</div>
 			</div>
 			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4">
-				<h2>By {author}</h2>
-				<div>{body}</div>
-				<div>{tags}</div>
+				<p>{tags}</p>
 			</div>
 		</>
 	);
