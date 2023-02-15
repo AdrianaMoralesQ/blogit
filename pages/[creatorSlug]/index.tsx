@@ -73,10 +73,6 @@ export default function Home() {
 					const resp = supabase.storage.from("public").getPublicUrl(data.path);
 					const publicUrl = resp.data.publicUrl;
 					setPicture_url(publicUrl);
-					// const updateArticleResponse = await supabase
-					// 	.from("articles")
-					// 	.update({ picture_url: publicUrl });
-					// if (updateArticleResponse.error) throw error;
 				}
 			}
 		} catch (error) {

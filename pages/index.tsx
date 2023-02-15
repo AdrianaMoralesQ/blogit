@@ -1,9 +1,9 @@
 import supabase from "../utils/supabaseClient";
 import Link from "next/link";
 import Image from "next/image";
-
-import { useContext } from "react";
+import React, { useContext, Component } from "react";
 import { UserContext } from "../context";
+import { Carousel } from "react-responsive-carousel";
 
 type Article = {
 	title: string;
@@ -33,7 +33,7 @@ export async function getStaticProps() {
 
 export default function Index({ articles }: { articles: Article[] }) {
 	const { isAuthenticated, userName } = useContext(UserContext);
-
+	const Featured = articles.filter((feature) => feature.tags === "Featured");
 	return (
 		<div>
 			<div>
@@ -49,6 +49,29 @@ export default function Index({ articles }: { articles: Article[] }) {
 				<h2 className="block font-extrabold text-grey-700 mt-4">
 					Featured Posts
 				</h2>
+				<div>
+					<ul className="grid grid-cols-3 gap-2">
+						{Featured?.map(({ author, title, id, picture_url }) => (
+							<li key={id}>
+								<div>
+									<Link as={`/articles/${id}`} href={`/articles/[slug]`}>
+										<div>
+											<Image
+												src={picture_url}
+												height={200}
+												width={250}
+												alt={`picture for ${title}`}
+												className="rounded-md border-transparent"
+											/>
+										</div>
+										<h3>{title}</h3>
+										<div>By {author}</div>
+									</Link>
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
 			<div className="  bg-sky-100 m-8 rounded-md border-transparent p-4 ">
 				<h2 className="block font-extrabold text-grey-700 mt-4"> All Posts</h2>
