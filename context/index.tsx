@@ -20,7 +20,7 @@ export function UserProvider({ children }: UserProviderProps) {
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 	const { pathname } = useRouter();
 	const [userId, setUserId] = useState<string | undefined>();
-	const [userName, setUserName] = useState<string | undefined>();
+	const [userName, setUserName] = useState<string>("");
 	const router = useRouter();
 	const { creatorSlug } = router.query;
 
@@ -67,6 +67,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
 	useEffect(() => {
 		const getUserName = async () => {
+			if (!userId) return;
 			const usernameResponse = await supabase
 				.from("users")
 				.select("username, user_id")
