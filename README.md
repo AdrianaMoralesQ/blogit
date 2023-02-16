@@ -1,24 +1,22 @@
 # Blog it - 🚧 WIP 🚧
 
-By popular demand and potential client requests, this personal project is built with TypeScript and Next.js. I also will be using the Supabase API and Tailwind.CSS. Headless UI has helped me with the design implementation as well.
+By popular demand and client requests, this personal project is built with TypeScript and Next.js. I used the Supabase API as a databse and as an authenticator. Tailwind.CSS came to the rescue for styling. I also used React-Hook-Forms and React-Responsive-Carousel for easy-to-use components.
 
 ## Description
 
-Currently WIP - this project will have a landing page and a write/edit article page, which will enable logged-in users to post and make changes to their articles.
+This project has a landing page and a write/edit article page, which enables logged-in users to post and make changes to their articles. (Edit function is WIP).
 
-The app will feature authentication so signed-in users can add blog posts, while visitors can only read them.
+The app features authentication so signed-in users can add blog posts, while visitors can only read them.
 
 ## Objective 🏔️
 
-I like clones - cloning takes the pressure off of creating a new app and it allows me to practice what I know while I learn new coding skills.
-Clones also prevent me from spending too much designing the appearance of my application, allowing me to focus on functionality ins
-tead.
+I like clones - and this is a scaled down version of Buzzfeed. Cloning takes the pressure off of creating a new app and it allows me to practice what I know while I learn new coding skills.
+Clones also prevent me from spending too much designing the appearance of my application, allowing me to focus on functionality instead.
 
 tldr:
 
 - Used Supabase as a database and for authentication
-- Exploring new libraries
-- Creating a user-friendly, clean-coded and live application
+- Used Tailwind.css for styling
 
 ## Stack 💻
 

@@ -1,11 +1,10 @@
 import supabase from "../utils/supabaseClient";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useContext, Component } from "react";
+import React, { Fragment, useContext } from "react";
 import { UserContext } from "../context";
-import { Carousel } from "react-responsive-carousel";
 import AutoAvatar from "../components/Avatar";
-import IsFeatured from "../components/Featured";
+import IsFeatured from "../components/Carousel";
 
 type Article = {
 	title: string;
@@ -40,28 +39,30 @@ export default function Index({ articles }: { articles: Article[] }) {
 	);
 	return (
 		<>
-			<div>
+			<div className="flex flex-row m-8">
 				{isAuthenticated ? (
 					<>
+						<AutoAvatar userId={userId} size={100} />
 						<h2 className="block font-extrabold text-sky-800 m-8">
 							Hi {`${userName}`}!
 						</h2>
-						<AutoAvatar userId={userId} size={100} />
 					</>
 				) : (
-					<h2 className="block font-extrabold text-grey-700 mt-4">Hi!</h2>
+					<h2 className="block font-extrabold text-grey-700 mt-4"></h2>
 				)}
 			</div>
-			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4">
+			<div className="flex flex-col items-center bg-sky-100 m-8 rounded-md border-transparent p-4">
 				<h2 className="block font-extrabold text-grey-700 mt-4">
 					Featured Posts
 				</h2>
-				<IsFeatured articles={featuredArticles} />
+				<div className="w-1/3">
+					<IsFeatured articles={featuredArticles} />
+				</div>
 			</div>
 			<div className="  bg-sky-100 m-8 rounded-md border-transparent p-4 ">
 				<h2 className="block font-extrabold text-grey-700 mt-4"> All Posts</h2>
 				<div>
-					<ul className="grid grid-cols-3 gap-2">
+					<ul className="grid grid-cols-3 gap-2 items-start">
 						{articles?.map(({ author, title, id, picture_url }) => (
 							<li key={id}>
 								<div>
@@ -76,7 +77,7 @@ export default function Index({ articles }: { articles: Article[] }) {
 											/>
 										</div>
 										<h3>{title}</h3>
-										<div>By {author}</div>
+										<p>By {author}</p>
 									</Link>
 								</div>
 							</li>
