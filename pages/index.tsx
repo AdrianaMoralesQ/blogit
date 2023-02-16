@@ -59,7 +59,7 @@ export default function Index({ articles }: { articles: Article[] }) {
 					<IsFeatured articles={featuredArticles} />
 				</div>
 			</div>
-			<div className="  bg-sky-100 m-8 rounded-md border-transparent p-4 ">
+			<div className="bg-sky-100 m-8 rounded-md border-transparent p-4 ">
 				<h2 className="block font-extrabold text-grey-700 mt-4"> All Posts</h2>
 				<div>
 					<ul className="grid grid-cols-3 gap-2 items-start">
@@ -73,7 +73,7 @@ export default function Index({ articles }: { articles: Article[] }) {
 												height={200}
 												width={250}
 												alt={`picture for ${title}`}
-												className="rounded-md border-transparent"
+												className="rounded-md border-transparent object-cover h-64 w-64"
 											/>
 										</div>
 										<h3>{title}</h3>

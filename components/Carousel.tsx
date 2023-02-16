@@ -24,7 +24,7 @@ export default function IsFeatured({ articles }: { articles: Article[] }) {
 							height={400}
 							width={400}
 							alt={`picture for ${title}`}
-							className="rounded-md border-transparent"
+							className="rounded-md border-transparent object-cover h-96 w-96"
 						/>
 						<p className="legend">{title}</p>
 					</Fragment>
