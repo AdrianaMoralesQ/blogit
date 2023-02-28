@@ -32,7 +32,7 @@ export const getStaticProps = async ({
 	params: { slug: string };
 }) => {
 	const data: Post = await getPostFromID(params.slug);
-	console.log("data from staticProps:", data);
+	// console.log("data from staticProps:", data);
 	return { props: { ...data } };
 };
 

@@ -34,7 +34,7 @@ export default function Signup() {
 				const userId = resp.data.user?.id;
 				if (userId) {
 					await createUser(userId, username);
-					console.log("userId:", userId, username);
+					// console.log("userId:", userId, username);
 				}
 			}
 		} catch (error) {
