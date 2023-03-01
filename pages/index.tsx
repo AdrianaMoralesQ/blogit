@@ -35,7 +35,7 @@ export async function getStaticProps() {
 export default function Index({ articles }: { articles: Article[] }) {
 	const { isAuthenticated, userName, userId } = useContext(UserContext);
 	const featuredArticles = articles.filter(
-		(feature) => feature.tags === "Featured"
+		(feature) => feature.tags === "featured"
 	);
 	return (
 		<>
