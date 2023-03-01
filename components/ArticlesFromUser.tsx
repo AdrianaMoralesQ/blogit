@@ -14,10 +14,10 @@ export default function ArticlesFromUser({ userName }: { userName: string }) {
 	if (!!articles.length) {
 		return (
 			<div>
-				{articles.map(({ title, author, id }) => (
+				<h3>Click on an article to edit it:</h3>
+				{articles.map(({ title, id }) => (
 					<Fragment key={id}>
-						<h3>{title}</h3>
-						<h3>{author}</h3>
+						<p>{title}</p>
 					</Fragment>
 				))}
 			</div>

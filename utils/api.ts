@@ -21,7 +21,7 @@ export async function getArticlesFromUser(
 		try {
 			const { data, error } = await supabase
 				.from("articles")
-				.select("id, title, author, picture_url, tags")
+				.select("id, title, author, picture_url, body, tags")
 				.eq("author", `${userName}`);
 
 			if (error) throw error;

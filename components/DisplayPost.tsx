@@ -1,13 +1,7 @@
 import Image from "next/image";
+import { Post } from "../Common/types";
 
-type Props = {
-	title: string;
-	author: string;
-	body: string;
-	description: string;
-	tags: string;
-	image: string;
-};
+type Props = Partial<Post> & { image: string };
 
 export function DisplayPost({
 	title,

@@ -6,8 +6,8 @@ import Image from "next/image";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
-import ArticlesFromUser from "../../components/ArticlesFromUser";
-import { Article } from "../../Common/types";
+
+import Link from "next/link";
 
 type IFormInput = {
 	title: string;
@@ -84,13 +84,17 @@ export default function Home() {
 
 	return (
 		<>
-			{userName && <ArticlesFromUser userName={userName} />}
 			<div className="flex flex-row m-8">
 				<AutoAvatar userId={userId} size={100} />
 				<h2 className="block font-extrabold text-sky-800 m-8">
 					Hi {`${userName}`}!
 				</h2>
 			</div>
+			<Link href="/previous" legacyBehavior>
+				<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
+					Edit Previous Posts
+				</a>
+			</Link>
 			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4">
 				<div className="mx-auto max-w-7xl px-6 ">
 					<form onSubmit={handleSubmit(onSubmit)}>
