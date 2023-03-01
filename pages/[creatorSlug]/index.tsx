@@ -6,6 +6,8 @@ import Image from "next/image";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
+import ArticlesFromUser from "../../components/ArticlesFromUser";
+import { Article } from "../../Common/types";
 
 type IFormInput = {
 	title: string;
@@ -27,7 +29,6 @@ export default function Home() {
 	};
 	const { userName, userId } = useContext(UserContext);
 
-	// Function to add new article, it requires author, title and body.
 	const addNewArticle = async ({
 		title,
 		author,
@@ -83,6 +84,7 @@ export default function Home() {
 
 	return (
 		<>
+			{userName && <ArticlesFromUser userName={userName} />}
 			<div className="flex flex-row m-8">
 				<AutoAvatar userId={userId} size={100} />
 				<h2 className="block font-extrabold text-sky-800 m-8">

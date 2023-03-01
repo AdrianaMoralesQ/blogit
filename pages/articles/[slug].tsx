@@ -54,3 +54,21 @@ export const getStaticPaths = async () => {
 		console.log("error on getStaticPath:", error);
 	}
 };
+
+export async function getStaticArticles() {
+	const getArticles = async () => {
+		try {
+			const { data, error } = await supabase
+				.from("articles")
+				.select("id, title, author, picture_url, tags");
+
+			if (error) throw error;
+			// console.log("data from index:", data);
+			return data;
+		} catch (error) {
+			console.log("error:", error);
+		}
+	};
+	const articles = await getArticles();
+	return { props: { articles } };
+}

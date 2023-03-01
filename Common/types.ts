@@ -8,3 +8,10 @@ export type Post = {
 	tags: string;
 	picture_url: string;
 };
+export type Article = {
+	title: string;
+	author: string;
+	id: string;
+	picture_url: string | undefined;
+	tags: string | undefined;
+};

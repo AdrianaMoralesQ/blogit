@@ -36,7 +36,7 @@ export function DisplayPost({
 						/>
 					</div>
 				</div>
-				<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4 ">
+				<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4 whitespace-pre-line">
 					{body}
 				</div>
 			</div>
