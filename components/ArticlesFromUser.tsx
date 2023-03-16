@@ -1,5 +1,3 @@
-import supabase from "../utils/supabaseClient";
-import { UserContext } from "../context";
 import { Fragment, useContext, useEffect, useState } from "react";
 import { getArticlesFromUser } from "../utils/api";
 import { Article } from "../Common/types";

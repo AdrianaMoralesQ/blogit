@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { DisplayPost } from "../../components/DisplayPost";
 import supabase from "../../utils/supabaseClient";
 import { getPostFromID } from "../../utils/api";

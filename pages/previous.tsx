@@ -19,6 +19,7 @@ export default function PreviousPosts() {
 			</div>
 			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4 mt-2">
 				{userName && <ArticlesFromUser userName={userName} />}
+				<p></p>
 			</div>
 			;
 		</>

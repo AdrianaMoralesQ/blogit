@@ -34,3 +34,30 @@ export async function getArticlesFromUser(
 	const articles = await getArticles();
 	return resolve(articles);
 }
+
+export async function updateArticles(
+	userName: string,
+	body: string,
+	title: string,
+	tags: string
+
+	// resolve: (value: any) => void
+) {
+	const updateSingleArticle = async () => {
+		try {
+			const { data, error } = await supabase
+				.from("articles")
+				.update({ body, title, tags })
+				.eq("author", `${userName}`)
+				.select("*");
+
+			if (error) throw error;
+			console.log("data from filtered:", data);
+			return data;
+		} catch (error) {
+			console.log("error:", error);
+		}
+	};
+	const articles = await updateSingleArticle();
+	return articles;
+}
