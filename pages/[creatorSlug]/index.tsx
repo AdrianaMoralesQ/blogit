@@ -99,11 +99,14 @@ export default function Home() {
 					const publicUrl = resp.data.publicUrl;
 					setPicture_url(publicUrl);
 					if (publicUrl) {
-						toast("Success! Your image has been uploaded.", {
-							hideProgressBar: true,
-							autoClose: 2000,
-							type: "success",
-						});
+						toast(
+							"Your image has been uploaded. Please submit your article when ready",
+							{
+								hideProgressBar: true,
+								autoClose: 2000,
+								type: "success",
+							}
+						);
 					}
 				}
 			}
