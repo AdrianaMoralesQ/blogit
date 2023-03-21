@@ -6,7 +6,6 @@ import Image from "next/image";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
-
 import Link from "next/link";
 import { getPostFromID, updateArticles } from "../../utils/api";
 import { useRouter } from "next/router";
@@ -99,6 +98,13 @@ export default function Home() {
 					const resp = supabase.storage.from("public").getPublicUrl(data.path);
 					const publicUrl = resp.data.publicUrl;
 					setPicture_url(publicUrl);
+					if (publicUrl) {
+						toast("Success! Your image has been uploaded.", {
+							hideProgressBar: true,
+							autoClose: 2000,
+							type: "success",
+						});
+					}
 				}
 			}
 		} catch (error) {
