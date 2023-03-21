@@ -36,12 +36,11 @@ export async function getArticlesFromUser(
 }
 
 export async function updateArticles(
-	userName: string,
+	articleID: string,
 	body: string,
 	title: string,
 	description: string,
 	tags: string
-
 	// resolve: (value: any) => void
 ) {
 	const updateSingleArticle = async () => {
@@ -49,7 +48,7 @@ export async function updateArticles(
 			const { data, error } = await supabase
 				.from("articles")
 				.update({ body, title, tags, description })
-				.eq("author", `${userName}`)
+				.eq("id", articleID)
 				.select("*");
 
 			if (error) throw error;

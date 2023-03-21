@@ -27,15 +27,31 @@ export default function Home() {
 	const { register, handleSubmit, reset } = useForm<IFormInput>();
 	const [images, setImages] = useState<ImageListType>([]);
 	const [picture_url, setPicture_url] = useState<string>();
-	const onSubmit: SubmitHandler<IFormInput> = (data) => addNewArticle(data);
 	const onChange = (imageList: ImageListType) => {
 		setImages(imageList);
 	};
-	const isEditing = query.article;
+	const isEditing = query.article && typeof query.article === "string";
 
-	const handleClick = (title: string, body: string, tags: string) => {
-		updateArticles(title, body, tags, userName);
-	};
+	const onSubmit: SubmitHandler<IFormInput> = isEditing
+		? async (data) => {
+				const { title, description, body, tags } = data;
+				if (query.article && typeof query.article === "string") {
+					const createResponse = await updateArticles(
+						query.article,
+						body,
+						title,
+						description,
+						tags
+					);
+					if (createResponse) {
+						toast("Success! your article has been updated.", {
+							autoClose: 2000,
+							type: "success",
+						});
+					}
+				}
+		  }
+		: (data) => addNewArticle(data);
 
 	const addNewArticle = async ({
 		title,
@@ -96,7 +112,7 @@ export default function Home() {
 				reset({ ...data });
 			});
 		}
-	}, []);
+	}, [isEditing]);
 
 	return (
 		<>
@@ -218,17 +234,14 @@ export default function Home() {
 										className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 mt-4"
 										type="submit"
 									>
-										{" "}
-										Submit{" "}
+										Submit
 									</button>
 								) : (
 									<button
-										onClick={handleClick}
 										className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 mt-4"
 										type="submit"
 									>
-										{" "}
-										Update{" "}
+										Update
 									</button>
 								)}
 							</div>
