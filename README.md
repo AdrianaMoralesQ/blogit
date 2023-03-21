@@ -1,4 +1,4 @@
-# Blog it - 🚧 WIP 🚧
+# Blog it 
 
 By popular demand and client requests, this personal project is built with TypeScript and Next.js. I used the Supabase API as a databse and as an authenticator. Tailwind.CSS came to the rescue for styling. I also used React-Hook-Forms and React-Responsive-Carousel for easy-to-use components.
 
@@ -10,13 +10,14 @@ The app features authentication so signed-in users can add blog posts, while vis
 
 ## Objective 🏔️
 
-I like clones - and this is a scaled down version of Buzzfeed. Cloning takes the pressure off of creating a new app and it allows me to practice what I know while I learn new coding skills.
-Clones also prevent me from spending too much designing the appearance of my application, allowing me to focus on functionality instead.
+As a free lancer I've realized the demand for products for clients tends to be  consistent - small businesses want blogs and storefronts, this project is me adapting to that market, while adding skills to my stack. 
+This blog started off as a Buzzfeed clone and gradually transformed into a functional app that allows user to create and edit blog posts. 
 
 tldr:
 
 - Used Supabase as a database and for authentication
 - Used Tailwind.css for styling
+- Uses server-side rendering for faster loading.
 
 ## Stack 💻
 
