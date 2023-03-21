@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { Fragment, useContext } from "react";
 import { UserContext } from "../context";
+import AutoAvatar from "../components/Avatar";
 import IsFeatured from "../components/Carousel";
 
 type Article = {
@@ -55,13 +56,15 @@ export default function Index({ articles }: { articles: Article[] }) {
 								<>
 									<Link as={`/articles/${id}`} href={`/articles/[slug]`}>
 										<div>
-											<Image
-												src={picture_url}
-												height={200}
-												width={250}
-												alt={`picture for ${title}`}
-												className="rounded-md border-transparent object-cover h-64 w-64"
-											/>
+											{picture_url && (
+												<Image
+													src={picture_url}
+													height={200}
+													width={250}
+													alt={`picture for ${title}`}
+													className="rounded-md border-transparent object-cover h-64 w-64"
+												/>
+											)}
 										</div>
 										<h3>{title}</h3>
 										<p>By {author}</p>
