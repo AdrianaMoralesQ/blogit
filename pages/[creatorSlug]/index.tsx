@@ -1,13 +1,15 @@
 import supabase from "../../utils/supabaseClient";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
 
 import Link from "next/link";
+import { getPostFromID, updateArticles } from "../../utils/api";
+import { useRouter } from "next/router";
 
 type IFormInput = {
 	title: string;
@@ -19,15 +21,21 @@ type IFormInput = {
 };
 
 export default function Home() {
-	// React Form Hook, prevents use of useState for each input:
-	const { register, handleSubmit } = useForm<IFormInput>();
+	const { userName, userId } = useContext(UserContext);
+	const { query } = useRouter();
+
+	const { register, handleSubmit, reset } = useForm<IFormInput>();
 	const [images, setImages] = useState<ImageListType>([]);
 	const [picture_url, setPicture_url] = useState<string>();
 	const onSubmit: SubmitHandler<IFormInput> = (data) => addNewArticle(data);
 	const onChange = (imageList: ImageListType) => {
 		setImages(imageList);
 	};
-	const { userName, userId } = useContext(UserContext);
+	const isEditing = query.article;
+
+	const handleClick = (title: string, body: string, tags: string) => {
+		updateArticles(title, body, tags, userName);
+	};
 
 	const addNewArticle = async ({
 		title,
@@ -82,6 +90,14 @@ export default function Home() {
 		}
 	};
 
+	useEffect(() => {
+		if (isEditing && typeof query.article === "string") {
+			getPostFromID(query.article).then((data) => {
+				reset({ ...data });
+			});
+		}
+	}, []);
+
 	return (
 		<>
 			<div className="flex flex-row m-8">
@@ -91,9 +107,15 @@ export default function Home() {
 				</h2>
 			</div>
 			<Link href="/previous" legacyBehavior>
-				<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
-					Edit Previous Posts
-				</a>
+				{isEditing ? (
+					<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
+						Edit Another Post
+					</a>
+				) : (
+					<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
+						Edit Previous Posts
+					</a>
+				)}
 			</Link>
 			<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4">
 				<div className="mx-auto max-w-7xl px-6 ">
@@ -191,13 +213,24 @@ export default function Home() {
 								</button>
 							</div>
 							<div>
-								<button
-									className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 mt-4"
-									type="submit"
-								>
-									{" "}
-									Submit{" "}
-								</button>
+								{!isEditing ? (
+									<button
+										className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 mt-4"
+										type="submit"
+									>
+										{" "}
+										Submit{" "}
+									</button>
+								) : (
+									<button
+										onClick={handleClick}
+										className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 mt-4"
+										type="submit"
+									>
+										{" "}
+										Update{" "}
+									</button>
+								)}
 							</div>
 						</div>
 					</form>

@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { getArticlesFromUser } from "../utils/api";
 import { Article } from "../Common/types";
+import Link from "next/link";
 
 export default function ArticlesFromUser({ userName }: { userName: string }) {
 	const [articles, setArticles] = useState<Article[]>([]);
@@ -13,9 +14,14 @@ export default function ArticlesFromUser({ userName }: { userName: string }) {
 		return (
 			<div>
 				<h3>Click on an article to edit it:</h3>
-				{articles.map(({ title, id }) => (
+				{articles.map(({ title, id, author }) => (
 					<Fragment key={id}>
-						<p>{title}</p>
+						<Link
+							href={`/${userName}?article=${id}`}
+							className="flex columns-1 p-2"
+						>
+							{title}
+						</Link>
 					</Fragment>
 				))}
 			</div>
