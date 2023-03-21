@@ -39,14 +39,16 @@ export async function updateArticles(
 	userName: string,
 	body: string,
 	title: string,
+	description: string,
 	tags: string
+
 	// resolve: (value: any) => void
 ) {
 	const updateSingleArticle = async () => {
 		try {
 			const { data, error } = await supabase
 				.from("articles")
-				.update({ title, body, tags })
+				.update({ body, title, tags, description })
 				.eq("author", `${userName}`)
 				.select("*");
 

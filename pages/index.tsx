@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { Fragment, useContext } from "react";
 import { UserContext } from "../context";
-import AutoAvatar from "../components/Avatar";
 import IsFeatured from "../components/Carousel";
 
 type Article = {
