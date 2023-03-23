@@ -8,7 +8,7 @@ import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
 import Link from "next/link";
 import { getPostFromID, updateArticles } from "../../utils/api";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 
 type IFormInput = {
 	title: string;
@@ -30,6 +30,7 @@ export default function Home() {
 		setImages(imageList);
 	};
 	const isEditing = query.article && typeof query.article === "string";
+	const router = useRouter();
 
 	const onSubmit: SubmitHandler<IFormInput> = isEditing
 		? async (data) => {
@@ -47,6 +48,7 @@ export default function Home() {
 							autoClose: 2000,
 							type: "success",
 						});
+						router.push("/");
 					}
 				}
 		  }
@@ -80,6 +82,7 @@ export default function Home() {
 				if (error) throw error;
 				console.log("data:", data);
 			}
+			router.push("/");
 		} catch (error) {
 			console.log("error:", error);
 		}
