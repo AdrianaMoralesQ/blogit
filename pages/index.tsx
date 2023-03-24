@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { Fragment, useContext } from "react";
 import { UserContext } from "../context";
-import AutoAvatar from "../components/Avatar";
 import IsFeatured from "../components/Carousel";
 
 type Article = {
@@ -48,9 +47,12 @@ export default function Index({ articles }: { articles: Article[] }) {
 				</div>
 			</div>
 			<div className="bg-sky-100 m-8 rounded-md border-transparent p-4">
-				<h2 className="block font-extrabold text-grey-700 mt-4"> All Posts</h2>
-				<div>
-					<ul className="grid grid-cols-3">
+				<h2 className="font-extrabold text-grey-700 mt-4 flex justify-center">
+					{" "}
+					All Posts
+				</h2>
+				<div className="flex justify-center p-4 m-4">
+					<ul className="flex gap-5 justify-center flex-wrap">
 						{articles?.map(({ author, title, id, picture_url }) => (
 							<li key={id}>
 								<>
