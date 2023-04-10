@@ -2,6 +2,7 @@ import { DisplayPost } from "../../components/DisplayPost";
 import supabase from "../../utils/supabaseClient";
 import { getPostFromID } from "../../utils/api";
 import { Post } from "../../Common/types";
+import { useRouter } from "next/router";
 
 export default function PostPage({
 	title,
@@ -54,8 +55,9 @@ export const getStaticPaths = async () => {
 	}
 };
 
-export async function getStaticArticles() {
-	const getArticles = async () => {
+export const getUpdatedArticles = async () => {
+	const router = useRouter();
+	const getUpdatedArticle = async () => {
 		try {
 			const { data, error } = await supabase
 				.from("articles")
@@ -67,7 +69,9 @@ export async function getStaticArticles() {
 		} catch (error) {
 			console.log("error:", error);
 		}
+		const update = fetch("/api/update", {
+			method: "PUT",
+			body: JSON.stringify(getUpdatedArticle),
+		});
 	};
-	const articles = await getArticles();
-	return { props: { articles } };
-}
+};

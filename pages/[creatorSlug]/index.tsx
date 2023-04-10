@@ -31,6 +31,9 @@ export default function Home() {
 	};
 	const isEditing = query.article && typeof query.article === "string";
 	const router = useRouter();
+	const refreshData = () => {
+		router.replace(router.asPath);
+	};
 
 	const onSubmit: SubmitHandler<IFormInput> = isEditing
 		? async (data) => {
@@ -48,7 +51,9 @@ export default function Home() {
 							autoClose: 2000,
 							type: "success",
 						});
-						router.push("/");
+						// router.push("/");
+						router.replace(router.asPath);
+						console.log("router.asPath:", router.asPath);
 					}
 				}
 		  }
@@ -65,7 +70,7 @@ export default function Home() {
 			if (title && author && body) {
 				toast("Success! Thank you for submitting your article.", {
 					hideProgressBar: true,
-					autoClose: 2000,
+					autoClose: 3000,
 					type: "success",
 				});
 				const { data, error } = await supabase
@@ -82,6 +87,7 @@ export default function Home() {
 				if (error) throw error;
 				console.log("data:", data);
 			}
+			refreshData();
 			router.push("/");
 		} catch (error) {
 			console.log("error:", error);
