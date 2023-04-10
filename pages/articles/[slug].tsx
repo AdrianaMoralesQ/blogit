@@ -54,24 +54,3 @@ export const getStaticPaths = async () => {
 		console.log("error on getStaticPath:", error);
 	}
 };
-
-export const getUpdatedArticles = async () => {
-	const router = useRouter();
-	const getUpdatedArticle = async () => {
-		try {
-			const { data, error } = await supabase
-				.from("articles")
-				.select("id, title, author, picture_url, tags");
-
-			if (error) throw error;
-			// console.log("data from index:", data);
-			return data;
-		} catch (error) {
-			console.log("error:", error);
-		}
-		const update = fetch("/api/update", {
-			method: "PUT",
-			body: JSON.stringify(getUpdatedArticle),
-		});
-	};
-};
