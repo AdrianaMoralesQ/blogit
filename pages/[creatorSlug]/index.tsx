@@ -51,9 +51,8 @@ export default function Home() {
 							autoClose: 2000,
 							type: "success",
 						});
-						// router.push("/");
-						router.replace(router.asPath);
-						console.log("router.asPath:", router.asPath);
+						refreshData();
+						router.push("/");
 					}
 				}
 		  }

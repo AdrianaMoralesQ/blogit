@@ -48,7 +48,7 @@ export const getStaticPaths = async () => {
 		}));
 		return {
 			paths: slugMap,
-			fallback: false,
+			fallback: "blocking",
 		};
 	} catch (error) {
 		console.log("error on getStaticPath:", error);

@@ -13,7 +13,7 @@ type Article = {
 	tags: string | undefined;
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const getArticles = async () => {
 		try {
 			const { data, error } = await supabase
