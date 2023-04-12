@@ -9,6 +9,8 @@ import AutoAvatar from "../../components/Avatar";
 import Link from "next/link";
 import { getPostFromID, updateArticles } from "../../utils/api";
 import { Router, useRouter } from "next/router";
+import { Article } from "../../Common/types";
+import { getStaticProps } from "../articles/[slug]";
 
 type IFormInput = {
 	title: string;
@@ -31,10 +33,14 @@ export default function Home() {
 	};
 	const isEditing = query.article && typeof query.article === "string";
 	const router = useRouter();
-	const refreshData = () => {
-		router.replace(router.asPath);
-	};
 
+	const handleClick = (e) => {
+		e.preventDefault();
+		if (query.article && typeof query.article === "string") {
+			deleteArticle({ id: query.article });
+			console.log("The button was clicked", query.article);
+		}
+	};
 	const onSubmit: SubmitHandler<IFormInput> = isEditing
 		? async (data) => {
 				const { title, description, body, tags } = data;
@@ -48,10 +54,9 @@ export default function Home() {
 					);
 					if (createResponse) {
 						toast("Success! your article has been updated.", {
-							autoClose: 2000,
+							autoClose: 3000,
 							type: "success",
 						});
-						refreshData();
 						router.push("/");
 					}
 				}
@@ -86,12 +91,28 @@ export default function Home() {
 				if (error) throw error;
 				console.log("data:", data);
 			}
-			refreshData();
 			router.push("/");
 		} catch (error) {
 			console.log("error:", error);
 		}
 	};
+	const deleteArticle = async ({ id }: { id: string }) => {
+		try {
+			if (id) {
+				toast("Success! We've deleted your article.", {
+					hideProgressBar: true,
+					autoClose: 3000,
+					type: "success",
+				});
+				const { error } = await supabase.from("articles").delete().eq("id", id);
+				if (error) throw error;
+			}
+			router.push("/");
+		} catch (error) {
+			console.log("error:", error);
+		}
+	};
+
 	const uploadArticlePicture = async () => {
 		try {
 			if (images.length > 0) {
@@ -111,7 +132,7 @@ export default function Home() {
 							"Your image has been uploaded. Please submit your article when ready",
 							{
 								hideProgressBar: true,
-								autoClose: 2000,
+								autoClose: 3000,
 								type: "success",
 							}
 						);
@@ -141,9 +162,17 @@ export default function Home() {
 			</div>
 			<Link href="/previous" legacyBehavior>
 				{isEditing ? (
-					<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
-						Edit Another Post
-					</a>
+					<>
+						<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
+							Edit Another Post
+						</a>
+						<button
+							onClick={handleClick}
+							className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8"
+						>
+							Delete this post
+						</button>
+					</>
 				) : (
 					<a className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 m-8">
 						Edit Previous Posts
