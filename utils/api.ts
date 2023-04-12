@@ -72,24 +72,22 @@ export async function addArticles(
 	author: string,
 	picture_url: string
 ) {
-	const addSingleArticle = async () => {
-		try {
-			const { data, error } = await supabase
-				.from("articles")
-				.insert({
-					title: title,
-					author: author,
-					description: description,
-					body: body,
-					picture_url: picture_url,
-					tags: tags,
-				})
-				.select();
-			if (error) throw error;
-		} catch (error) {
-			console.log("error:", error);
-		}
-	};
+	try {
+		const { data, error } = await supabase
+			.from("articles")
+			.insert({
+				title: title,
+				author: author,
+				description: description,
+				body: body,
+				picture_url: picture_url,
+				tags: tags,
+			})
+			.select();
+		if (error) throw error;
+	} catch (error) {
+		console.log("error:", error);
+	}
 }
 
 export async function deleteArticles({ id }: { id: string }) {

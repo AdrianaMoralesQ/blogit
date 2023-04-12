@@ -14,7 +14,7 @@ import {
 	updateArticles,
 	uploadSinglePicture,
 } from "../../utils/api";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 type IFormInput = {
 	title: string;
@@ -31,7 +31,6 @@ export default function Home() {
 
 	const { register, handleSubmit, reset } = useForm<IFormInput>();
 	const [images, setImages] = useState<ImageListType>([]);
-	const [picture_url, setPicture_url] = useState<string>();
 	const onChange = (imageList: ImageListType) => {
 		setImages(imageList);
 	};
