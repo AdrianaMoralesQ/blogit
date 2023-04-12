@@ -8,6 +8,7 @@ import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
 import Link from "next/link";
 import {
+	addArticles,
 	deleteArticles,
 	getPostFromID,
 	updateArticles,
@@ -66,40 +67,36 @@ export default function Home() {
 		  }
 		: (data) => addNewArticle(data);
 
-	const addNewArticle = async ({
-		title,
-		author,
-		body,
-		description,
-		tags,
-	}: IFormInput) => {
-		try {
-			if (title && author && body) {
+	const addNewArticle = async (data: {
+		title: any;
+		author: any;
+		description: any;
+		body: any;
+		tags: any;
+		picture_url: any;
+	}) => {
+		const { title, description, body, tags, author, picture_url } = data;
+		if (title && author && body) {
+			const createResponse = await addArticles(
+				title,
+				author,
+				description,
+				body,
+				tags,
+				picture_url
+			);
+			if (createResponse !== null) {
 				toast("Success! Thank you for submitting your article.", {
 					hideProgressBar: true,
 					autoClose: 3000,
 					type: "success",
 				});
-				const { data, error } = await supabase
-					.from("articles")
-					.insert({
-						title: title,
-						author: author,
-						description: description,
-						body: body,
-						picture_url: picture_url,
-						tags: tags,
-					})
-					.select();
-				if (error) throw error;
-				console.log("data:", data);
+				router.push("/");
 			}
-			router.push("/");
-		} catch (error) {
-			console.log("error:", error);
 		}
 	};
-	const deleteArticle = async (id) => {
+
+	const deleteArticle = async (id: { id: string }) => {
 		if (query.article && typeof query.article === "string") {
 			const deleteCurrentArticle = await deleteArticles(id);
 			if (deleteCurrentArticle !== null) {
