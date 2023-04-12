@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import supabase from "./supabaseClient";
 
 export const getPostFromID = async (id: string) => {
@@ -60,4 +61,13 @@ export async function updateArticles(
 	};
 	const articles = await updateSingleArticle();
 	return articles;
+}
+
+export async function deleteArticles({ id }: { id: string }) {
+	try {
+		const { error } = await supabase.from("articles").delete().eq("id", id);
+		if (error) throw error;
+	} catch (error) {
+		console.log("error:", error);
+	}
 }

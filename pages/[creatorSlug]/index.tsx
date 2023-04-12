@@ -7,10 +7,8 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
 import Link from "next/link";
-import { getPostFromID, updateArticles } from "../../utils/api";
+import { deleteArticles, getPostFromID, updateArticles } from "../../utils/api";
 import { Router, useRouter } from "next/router";
-import { Article } from "../../Common/types";
-import { getStaticProps } from "../articles/[slug]";
 
 type IFormInput = {
 	title: string;
@@ -96,20 +94,16 @@ export default function Home() {
 			console.log("error:", error);
 		}
 	};
-	const deleteArticle = async ({ id }: { id: string }) => {
-		try {
-			if (id) {
+	const deleteArticle = async (id) => {
+		if (query.article && typeof query.article === "string") {
+			const deleteCurrentArticle = await deleteArticles(id);
+			if (deleteCurrentArticle !== null) {
 				toast("Success! We've deleted your article.", {
-					hideProgressBar: true,
 					autoClose: 3000,
 					type: "success",
 				});
-				const { error } = await supabase.from("articles").delete().eq("id", id);
-				if (error) throw error;
+				router.push("/");
 			}
-			router.push("/");
-		} catch (error) {
-			console.log("error:", error);
 		}
 	};
 
