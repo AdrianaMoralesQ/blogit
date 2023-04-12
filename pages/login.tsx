@@ -62,6 +62,18 @@ export default function Login() {
 						</button>
 					</div>
 				</form>
+				<div>
+					<p className="mt-4 mb-2 font-medium">
+						Is this your first time using Blog!t? You can create your own
+						account with just an email.
+					</p>
+					<button
+						className="text-sky-100 group inline-flex items-center rounded-md bg-sky-900 text-base font-medium hover:text-indigo-300 p-1 mt-4 m-auto"
+						onClick={() => router.push("/signup")}
+					>
+						Sign up
+					</button>
+				</div>
 			</div>
 		</div>
 	);
