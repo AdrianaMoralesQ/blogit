@@ -1,4 +1,5 @@
-import { useRouter } from "next/router";
+import { useState } from "react";
+import { ImageListType } from "react-images-uploading";
 import supabase from "./supabaseClient";
 
 export const getPostFromID = async (id: string) => {
@@ -67,6 +68,25 @@ export async function deleteArticles({ id }: { id: string }) {
 	try {
 		const { error } = await supabase.from("articles").delete().eq("id", id);
 		if (error) throw error;
+	} catch (error) {
+		console.log("error:", error);
+	}
+}
+
+export async function uploadSinglePicture() {
+	const [images, setImages] = useState<ImageListType>([]);
+	const [picture_url, setPicture_url] = useState<string>();
+	try {
+		const image = images[0];
+		const { data, error } = await supabase.storage
+			.from("public")
+			.upload(`${image.file.name}`, image.file, {
+				upsert: true,
+			});
+		if (error) throw error;
+		const resp = supabase.storage.from("public").getPublicUrl(data.path);
+		const publicUrl = resp.data.publicUrl;
+		setPicture_url(publicUrl);
 	} catch (error) {
 		console.log("error:", error);
 	}

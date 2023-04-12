@@ -7,7 +7,12 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import { UserContext } from "../../context";
 import AutoAvatar from "../../components/Avatar";
 import Link from "next/link";
-import { deleteArticles, getPostFromID, updateArticles } from "../../utils/api";
+import {
+	deleteArticles,
+	getPostFromID,
+	updateArticles,
+	uploadSinglePicture,
+} from "../../utils/api";
 import { Router, useRouter } from "next/router";
 
 type IFormInput = {
@@ -108,33 +113,21 @@ export default function Home() {
 	};
 
 	const uploadArticlePicture = async () => {
-		try {
-			if (images.length > 0) {
-				const image = images[0];
-				if (image.file) {
-					const { data, error } = await supabase.storage
-						.from("public")
-						.upload(`${image.file.name}`, image.file, {
-							upsert: true,
-						});
-					if (error) throw error;
-					const resp = supabase.storage.from("public").getPublicUrl(data.path);
-					const publicUrl = resp.data.publicUrl;
-					setPicture_url(publicUrl);
-					if (publicUrl) {
-						toast(
-							"Your image has been uploaded. Please submit your article when ready",
-							{
-								hideProgressBar: true,
-								autoClose: 3000,
-								type: "success",
-							}
-						);
-					}
+		if (images.length > 0) {
+			const image = images[0];
+			if (image.file) {
+				const createResponse = await uploadSinglePicture();
+				if (createResponse !== null) {
+					toast(
+						"Your image has been uploaded. Please submit your article when ready",
+						{
+							hideProgressBar: true,
+							autoClose: 3000,
+							type: "success",
+						}
+					);
 				}
 			}
-		} catch (error) {
-			console.log("error:", error);
 		}
 	};
 
