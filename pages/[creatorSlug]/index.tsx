@@ -1,4 +1,3 @@
-import supabase from "../../utils/supabaseClient";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
@@ -41,7 +40,6 @@ export default function Home() {
 		e.preventDefault();
 		if (query.article && typeof query.article === "string") {
 			deleteArticle({ id: query.article });
-			console.log("The button was clicked", query.article);
 		}
 	};
 	const onSubmit: SubmitHandler<IFormInput> = isEditing

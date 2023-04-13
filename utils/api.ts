@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ImageListType } from "react-images-uploading";
 import supabase from "./supabaseClient";
 
+/* Get articles filtered by ID from Supabase */
 export const getPostFromID = async (id: string) => {
 	try {
 		const { data, error } = await supabase
@@ -14,7 +15,7 @@ export const getPostFromID = async (id: string) => {
 		console.log("error:", error);
 	}
 };
-
+/* Get articles filtered by user from Supabase */
 export async function getArticlesFromUser(
 	userName: string,
 	resolve: (value: any) => void
@@ -37,13 +38,13 @@ export async function getArticlesFromUser(
 	return resolve(articles);
 }
 
+/* Update existing single article on Supabase, takes article ID */
 export async function updateArticles(
 	articleID: string,
 	body: string,
 	title: string,
 	description: string,
 	tags: string
-	// resolve: (value: any) => void
 ) {
 	const updateSingleArticle = async () => {
 		try {
@@ -63,7 +64,7 @@ export async function updateArticles(
 	const articles = await updateSingleArticle();
 	return articles;
 }
-
+/* Create article in Supabase */
 export async function addArticles(
 	body: string,
 	title: string,
@@ -90,6 +91,7 @@ export async function addArticles(
 	}
 }
 
+/* Delete articles on Supabase */
 export async function deleteArticles({ id }: { id: string }) {
 	try {
 		const { error } = await supabase.from("articles").delete().eq("id", id);
@@ -99,6 +101,7 @@ export async function deleteArticles({ id }: { id: string }) {
 	}
 }
 
+/* Upload a picture to Supabase, creates public url for it */
 export async function uploadSinglePicture() {
 	const [images, setImages] = useState<ImageListType>([]);
 	const [picture_url, setPicture_url] = useState<string>();
@@ -113,6 +116,20 @@ export async function uploadSinglePicture() {
 		const resp = supabase.storage.from("public").getPublicUrl(data.path);
 		const publicUrl = resp.data.publicUrl;
 		setPicture_url(publicUrl);
+	} catch (error) {
+		console.log("error:", error);
+	}
+}
+
+export async function loginWithUserEmail(email: string, password: string) {
+	try {
+		if (email && password) {
+			const resp = await supabase.auth.signInWithPassword({
+				email: email,
+				password: password,
+			});
+			if (resp.error) throw resp.error;
+		}
 	} catch (error) {
 		console.log("error:", error);
 	}

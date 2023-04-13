@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import supabase from "../utils/supabaseClient";
+import { loginWithUserEmail } from "../utils/api";
 
 type IFormInput = {
 	email: string;
@@ -14,18 +15,11 @@ export default function Login() {
 	const router = useRouter();
 
 	const loginWithEmail = async ({ email, password }: IFormInput) => {
-		try {
-			if (email && password) {
-				const resp = await supabase.auth.signInWithPassword({
-					email: email,
-					password: password,
-				});
-				router.push(`/`);
-				if (resp.error) throw resp.error;
-			}
-		} catch (error) {
-			console.log("error:", error);
+		if (email && password) {
+			const resp = await loginWithUserEmail(email, password);
 		}
+		router.push(`/`);
+		console.log("logging in", email);
 	};
 
 	return (
