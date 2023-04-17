@@ -24,7 +24,6 @@ export function UserProvider({ children }: UserProviderProps) {
 	const router = useRouter();
 	const { creatorSlug } = router.query;
 
-	// console.log({ userName, userId, isAuthenticated });
 	// For authentication, checks if user has initiated a session
 	useEffect(() => {
 		const getUser = async () => {

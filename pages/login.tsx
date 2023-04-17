@@ -19,7 +19,6 @@ export default function Login() {
 			const resp = await loginWithUserEmail(email, password);
 		}
 		router.push(`/`);
-		console.log("logging in", email);
 	};
 
 	return (

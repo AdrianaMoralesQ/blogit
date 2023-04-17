@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ImageListType } from "react-images-uploading";
 import supabase from "./supabaseClient";
+import { UserContext } from "../context";
 
 /* Get articles filtered by ID from Supabase */
 export const getPostFromID = async (id: string) => {
@@ -134,3 +135,39 @@ export async function loginWithUserEmail(email: string, password: string) {
 		console.log("error:", error);
 	}
 }
+
+// export async function signUpWithUserEmail(
+// 	username: string,
+// 	email: string,
+// 	password: string
+// ) {
+// 	try {
+// 		if (email && password && username) {
+// 			const resp = await supabase.auth.signUp({
+// 				email: email,
+// 				password: password,
+// 			});
+// 			if (resp.error) throw resp.error;
+// 			const userId = resp.data.user?.id;
+// 			if (userId) {
+// 				await createSingleUser(userId, username);
+// 			}
+// 		}
+// 	} catch (error) {
+// 		console.log("error:", error);
+// 	}
+// }
+
+// async function createSingleUser(userId: string, username: string) {
+// 	const { setUserName } = useContext(UserContext);
+// 	try {
+// 		const { error } = await supabase
+// 			.from("users")
+// 			.insert({ user_id: userId, username: username });
+// 		// instead of set username here, move to context
+// 		setUserName(username);
+// 		if (error) throw error;
+// 	} catch (error) {
+// 		console.log("error:", error);
+// 	}
+// }
