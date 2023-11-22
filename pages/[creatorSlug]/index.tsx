@@ -73,13 +73,14 @@ export default function Home() {
 		picture_url: any;
 	}) => {
 		const { title, description, body, tags, author, picture_url } = data;
+
 		if (title && author && body) {
 			const createResponse = await addArticles(
-				title,
-				author,
-				description,
 				body,
+				title,
+				description,
 				tags,
+				author,
 				picture_url
 			);
 			if (createResponse !== null) {

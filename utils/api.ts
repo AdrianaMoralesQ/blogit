@@ -78,12 +78,12 @@ export async function addArticles(
 		const { data, error } = await supabase
 			.from("articles")
 			.insert({
-				title: title,
-				author: author,
-				description: description,
-				body: body,
-				picture_url: picture_url,
-				tags: tags,
+				title,
+				author,
+				description,
+				body,
+				picture_url,
+				tags,
 			})
 			.select();
 		if (error) throw error;
