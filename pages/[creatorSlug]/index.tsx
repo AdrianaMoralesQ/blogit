@@ -75,14 +75,14 @@ export default function Home() {
 		const { title, description, body, tags, author, picture_url } = data;
 
 		if (title && author && body) {
-			const createResponse = await addArticles(
-				body,
+			const createResponse = await addArticles({
+				tags,
 				title,
 				description,
-				tags,
+				body,
+				picture_url,
 				author,
-				picture_url
-			);
+			});
 			if (createResponse !== null) {
 				toast("Success! Thank you for submitting your article.", {
 					hideProgressBar: true,

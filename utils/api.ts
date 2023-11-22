@@ -65,15 +65,19 @@ export async function updateArticles(
 	const articles = await updateSingleArticle();
 	return articles;
 }
+
+type AddArticleProps = {
+	body: string;
+	title: string;
+	description: string;
+	tags: string;
+	author: string;
+	picture_url: string;
+};
+
 /* Create article in Supabase */
-export async function addArticles(
-	body: string,
-	title: string,
-	description: string,
-	tags: string,
-	author: string,
-	picture_url: string
-) {
+export async function addArticles(props: AddArticleProps) {
+	const { body, title, description, tags, author, picture_url } = props;
 	try {
 		const { data, error } = await supabase
 			.from("articles")
