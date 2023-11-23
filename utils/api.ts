@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ImageListType } from "react-images-uploading";
+import { ImageListType, ImageType } from "react-images-uploading";
 import supabase from "./supabaseClient";
 import { UserContext } from "../context";
 import { type } from "os";
@@ -114,11 +114,8 @@ export async function deleteArticles({ id }: { id: string }) {
 }
 
 /* Upload a picture to Supabase, creates public url for it */
-export async function uploadSinglePicture() {
-	const [images, setImages] = useState<ImageListType>([]);
-	const [picture_url, setPicture_url] = useState<string>();
+export async function uploadSinglePicture(image: ImageType) {
 	try {
-		const image = images[0];
 		const { data, error } = await supabase.storage
 			.from("public")
 			.upload(`${image.file.name}`, image.file, {
@@ -127,7 +124,7 @@ export async function uploadSinglePicture() {
 		if (error) throw error;
 		const resp = supabase.storage.from("public").getPublicUrl(data.path);
 		const publicUrl = resp.data.publicUrl;
-		setPicture_url(publicUrl);
+		return publicUrl;
 	} catch (error) {
 		console.log("error:", error);
 	}

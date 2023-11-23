@@ -21,13 +21,17 @@ export function DisplayPost({
 				</div>
 				<div className="m-8 relative bg-sky-100 rounded-md border-transparent p-4">
 					<div>
-						<Image
-							src={image}
-							alt={`Image for ${title}`}
-							height={400}
-							width={400}
-							className="m-auto rounded-md border-transparent"
-						/>
+						{image ? (
+							<Image
+								src={image}
+								alt={`Image for ${title}`}
+								height={400}
+								width={400}
+								className="m-auto rounded-md border-transparent"
+							/>
+						) : (
+							<p>no image</p>
+						)}
 					</div>
 				</div>
 				<div className="relative bg-sky-100 m-8 rounded-md border-transparent p-4 whitespace-pre-line">

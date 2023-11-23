@@ -30,6 +30,7 @@ export default function Home() {
 
 	const { register, handleSubmit, reset } = useForm<IFormInput>();
 	const [images, setImages] = useState<ImageListType>([]);
+	const [picture_url, setPicture_url] = useState<string>();
 	const onChange = (imageList: ImageListType) => {
 		setImages(imageList);
 	};
@@ -53,7 +54,7 @@ export default function Home() {
 							description,
 							tags,
 							author: userName,
-							picture_url: images[0]["data_url"],
+							picture_url: picture_url,
 						},
 						query.article
 					);
@@ -74,9 +75,8 @@ export default function Home() {
 		description: any;
 		body: any;
 		tags: any;
-		picture_url: any;
 	}) => {
-		const { title, description, body, tags, author, picture_url } = data;
+		const { title, description, body, tags, author } = data;
 
 		if (title && author && body) {
 			const createResponse = await addArticles({
@@ -115,8 +115,10 @@ export default function Home() {
 		if (images.length > 0) {
 			const image = images[0];
 			if (image.file) {
-				const createResponse = await uploadSinglePicture();
-				if (createResponse !== null) {
+				const publicUrl = await uploadSinglePicture(image);
+
+				setPicture_url(publicUrl);
+				if (publicUrl !== null) {
 					toast(
 						"Your image has been uploaded. Please submit your article when ready",
 						{
