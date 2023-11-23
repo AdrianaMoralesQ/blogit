@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { ImageListType } from "react-images-uploading";
 import supabase from "./supabaseClient";
 import { UserContext } from "../context";
+import { type } from "os";
 
 /* Get articles filtered by ID from Supabase */
 export const getPostFromID = async (id: string) => {
@@ -40,18 +41,24 @@ export async function getArticlesFromUser(
 }
 
 /* Update existing single article on Supabase, takes article ID */
+type UpdateArticleProps = {
+	body: string;
+	title: string;
+	description: string;
+	tags: string;
+	author: string;
+	picture_url: string;
+};
 export async function updateArticles(
-	articleID: string,
-	body: string,
-	title: string,
-	description: string,
-	tags: string
+	props: UpdateArticleProps,
+	articleID: string
 ) {
+	const { body, title, description, tags, author, picture_url } = props;
 	const updateSingleArticle = async () => {
 		try {
 			const { data, error } = await supabase
 				.from("articles")
-				.update({ body, title, tags, description })
+				.update({ body, title, tags, description, picture_url })
 				.eq("id", articleID)
 				.select("*");
 

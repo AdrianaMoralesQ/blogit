@@ -47,11 +47,15 @@ export default function Home() {
 				const { title, description, body, tags } = data;
 				if (query.article && typeof query.article === "string") {
 					const createResponse = await updateArticles(
-						query.article,
-						body,
-						title,
-						description,
-						tags
+						{
+							body,
+							title,
+							description,
+							tags,
+							author: userName,
+							picture_url: images[0]["data_url"],
+						},
+						query.article
 					);
 					if (createResponse) {
 						toast("Success! your article has been updated.", {
@@ -172,13 +176,13 @@ export default function Home() {
 							<input
 								className="text-base font-medium text-gray-900 bg-white rounded-md border-transparent p-1 w-full"
 								placeholder="Your title goes here"
-								{...register("title", { required: true, maxLength: 50 })}
+								{...register("title", { required: true, maxLength: 100 })}
 							/>
 							<p className="mt-4 mb-2 font-medium">Description</p>
 							<input
 								className="text-base font-medium text-gray-900 bg-white rounded-md border-transparent p-1 w-full"
 								placeholder="Write your description/subtitle here"
-								{...register("description", { required: true, maxLength: 50 })}
+								{...register("description", { required: true, maxLength: 100 })}
 							/>
 							<p className="mt-4 mb-2 font-medium">Author</p>
 							<select
