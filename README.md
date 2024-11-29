@@ -4,7 +4,7 @@ By popular demand and client requests, this personal project is built with TypeS
 
 ## Description
 
-This project has a landing page and a write/edit article page, which enables logged-in users to post and make changes to their articles. (Edit function is WIP).
+This project has a landing page and a write/edit article page, which enables logged-in users to post and make changes to their articles.
 
 The app features authentication so signed-in users can add blog posts, while visitors can only read them.
 
